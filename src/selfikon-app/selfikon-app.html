@@ -14,526 +14,589 @@
 <link rel="import" href="./highlight-widget.html">
 <link rel="import" href="./team-widget.html">
 <dom-module id="selfikon-app">
-  <template>
-  
-    <style include="shared-styles" is="custom-style">
-      :host {
-        display: block;
-		width: 100%;
-		height: 100%;
-		color: white;
-      }
-	  
-	  app-header{
-		background: white;
-		position: relative;
-		height: 100vh;
-		
-	  }
-	 
-	  app-header[scrollable]{
-		pointer-events: none;
-	  }
-	  
-	  .app-toolbar{
-		height: 5em;
-		background-color: yellow;
-		
-	  }
-	  
-	  #logoHolder{
-		position: absolute;
-		background: white;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		@apply(--layout-horizontal);
-		@apply(--layout-center);
-		@apply(--layout-center-justified);
-	  }
-	  
-	  #logo img {
-		width: 700px;
-		margin: 5rem 0;
-	  }
-	 
-	.novSlant{
-		width: 100vw;
-		height: 100px;
-		transform: skewY(-1deg);
-		background: red;
-		z-index: 1;
-		margin-top: -50px;
-		margin-bottom: -50px;
-		box-shadow: 0 0 20px rgba(0,0,0,0.4);
-		position: relative;
-	}
-	
-	.suprotan{
-		transform: skewY(1deg);
-	}
-	
-	.normalan{
-		padding: 0 50px 50px 50px;
-		position: relative;
-		@apply(--layout-horizontal);
-		@apply(--layout-center);
-		@apply(--layout-center-justified);
-		@apply(--layout-flex-wrap);
-	}
-	
-	.color1.novSlant{
-		z-index: 1;
-	}
-	
-	.color1.normalan{
-		z-index: 2;
-	}
-	
-	.color2.novSlant{
-		z-index: 3;
-	}
-	
-	.color2.normalan{
-		z-index: 4;
-	}
-	
-	.color3.novSlant{
-		z-index: 5;
-	}
-	
-	.color3.normalan{
-		z-index: 6;
-	}
-	
-	.color1{
-		background: #06c6c6;
-	}
-	
-	.color2{
-		background: #05adad;
-	}
-	
-	.color3{
-		background: #0b7474;
-	}
-	
-	.content{
-		 @apply(--layout-vertical);
-		 @apply(--layout-center);	
-		 @apply(--layout-center-justified);
-		 
-	}
-	
-	#highlights-container{
-		padding: 40px;
-		@apply(--layout-horizontal);
-		@apply(--layout-center);
-		@apply(--layout-wrap);
-		@apply(--layout-center-justified);
-	}
-	
-	.widget-container{
-		padding: 50px;
-		@apply(--layout-horizontal);
-		@apply(--layout-center);
-		@apply(--layout-center-justified);
-	}
-	
-	.highlights-p{
-		padding: 20px;
-		text-align: left;
-	}	
-	
-	.team-container{
-		width: 200px;
-		padding: 40px;
-		@apply(--layout-horizontal);
-		@apply(--layout-center);
-		@apply(--layout-center-justified);
-	}
-	
-	.img-container{
-		width: 500px;	
-		@apply(--layout-horizontal);
-		@apply(--layout-center);
-	}
-	
-	#buttonsHolder{
-		height: 5em;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		padding: 0 0.25em;
-		@apply(--layout-horizontal);
-		@apply(--layout-justified);
-		@apply(--layout-center);
-	}
-	
-	#social-holder{
-		@apply(--layout-horizontal);
-	}
-	
-	#buttonsHolder img{
-		height: 50px;
-		margin: 0 0.25em;
-		opacity: 0.8;
-		transition: 0.2s opacity;
-		pointer-events: all;
-	}
-	
-	#buttonsHolder a{
-		height: 50px;
-	}
-	
-	#buttonsHolder img:hover{
-		opacity: 1;
-	}
-	#stores-holder{
-		@apply(--layout-horizontal);
-	}
-	
-	footer{
-		background: #095d5d;
-		padding: 1em;
-		@apply(--layout-horizontal);
-		@apply(--layout-center);
-		@apply(--layout-center-justified);
-	}
-	
-	#scrolling{
-		display: -webkit-box;
-	}
-	
-	highlight-widget{
-		width: 20%;
-	}
-	
-	#slogan{
-		height: 0px;
-		overflow: visible;
-		color: black;
-		text-align: center;
-		position: relative;
-		top: -6rem;
-		font-size: 3em;
-		color: #048989;
-	}
-	
-	#slogan > span {
-		font-style: italic;
-	}
-	
-	[hidden]{
-		display: none !important;
-	}
-	
-	
-	
-    </style>
-	
-	<app-header-layout has-scrolling-region id="layout">
-		<app-header scrollable$="[[canScroll]]" slot="header" fixed condenses effects="selfikon-logo">
-			<div class="app-toolbar" id="toolbar">
-				
-			</div>
-			
-			<div id="logoHolder">
-				<div id="logo">
-					<img src="/images/logo-color.svg">
-					<div id="slogan" hidden$="[[sloganHidden]]">show your self<span>ie</span></div>
-				</div>
-			</div>
-			
-			<div id="buttonsHolder" hidden$="[[buttonsHidden]]">
-				<div id="social-holder">
-					<a href="http://selfikon.com/#/" target="_blank"><img src="/images/face.svg"/></a>
-					<a href="http://selfikon.com/#/" target="_blank"><img src="/images/insta.svg"/></a>
-					<a href="http://selfikon.com/#/" target="_blank"><img src="/images/twitter.svg"/></a>
-					<a href="http://selfikon.com/#/" target="_blank"><img src="/images/vk.svg"/></a>
-					<a href="http://selfikon.com/#/" target="_blank"><img src="/images/linkedin.svg"/></a>
-				</div>
-				<div id="stores-holder">
-					<a href="http://selfikon.com/#/" target="_blank"><img src="/images/playstore.jpg"/></a>
-					<a href="http://selfikon.com/#/" target="_blank"><img src="/images/appstore.jpg"/></a>
-					
-				</div>
-			</div>
-			<!--<div class="animated" at-top$="[[isAtTop]]">Test 1</div>-->	
-		</app-header>
-	
-	<!--<div class="novSlant color1"></div>-->
-	<div class="novSlant suprotan color1"></div>
-	
-	<iron-scroll-threshold lower-threshold="100" lower-triggered="{{isAtBottom}}" id="scrollThreshold"></iron-scroll-threshold>
-	
-	<div class="normalan color1">
-	
-		<div class="content">
-			<h1>Welcome</h1>
-			<p>Lorem ipsum dolor sit amet, nisl diam his cu. Vel fabulas minimum in, mel no meis liber euismod. Commune omnesque est ut, sit ocurreret mnesarchum at. At has ferri exerci, sit appetere partiendo ut.</p>
-		<div id="highlights-container">
-		<highlight-widget>
-		<img src="images/placeholder.jpg" slot="image">
-		<p slot="text">Usu nonumy mediocrem id, sale ipsum veritus quo ad, ea usu natum sanctus concludaturque et.</p>
-		</highlight-widget>
-		<highlight-widget>
-		<img src="images/placeholder.jpg" slot="image">
-		<p slot="text">Lorem ipsum dolor sit amet, est audire commune ex. Eum ea.</p>
-		</highlight-widget>
-		<highlight-widget>
-		<img src="images/placeholder.jpg" slot="image">
-		<p slot="text">Usu nonumy mediocrem id, sale ipsum veritus quo ad, ea usu natum sanctus concludaturque et.</p>
-		</highlight-widget>
-		<highlight-widget>
-		<img src="images/placeholder.jpg" slot="image">
-		<p slot="text">Lorem ipsum dolor sit amet, est audire commune ex. Eum ea.</p>
-		</highlight-widget>
-		</div>
-		</div>
-	</div>
-	<!--<div class="novSlant suprotan color1"></div>-->
-	<div class="novSlant color2"></div>
-	<div class="normalan color2">
-		<div class="content">
-			<div class="widget-container">
-				<content-widget>
-				</content-widget>
-			</div>
-			 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo</p>
-		</div>
-	</div>
-	<div class="novSlant color3 suprotan"></div>
-	<div class="normalan color3">
-		<div class="content">
-		<h1>Team members</h1>
-		<div class="team-container">
-			
-			<team-widget>
-				<img src="images/placeholder.jpg" slot="image">
-			</team-widget>
-			<team-widget>
-				<img src="images/placeholder.jpg" slot="image">
-			</team-widget>
-			<team-widget>
-				<img src="images/placeholder.jpg" slot="image">
-			</team-widget>
-			<team-widget>
-				<img src="images/placeholder.jpg" slot="image">
-			</team-widget>
-		</div>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo</p>
-		</div>
-	</div>
-	<footer>
-	
-	<paper-button raised on-tap="openTosDialog">Terms of service</paper-button>
-	<paper-button raised on-tap="openPpDialog">Privacy policy</paper-button>
-	
-		
-	</footer>
-	</app-header-layout>
-	
-	<paper-dialog id="dialogTos">
-  <h2>Terms of service</h2>
-  <paper-dialog-scrollable>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-      irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	</p>
-    
-	</paper-dialog-scrollable>
-		<div class="buttons">
-			<paper-button dialog-confirm autofocus>OK</paper-button>
-		</div>
-	</paper-dialog>
+    <template>
 
-	<paper-dialog id="dialogPp">
-	  <h2>Privacy policy</h2>
-	  <paper-dialog-scrollable>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-		  irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
-	  </paper-dialog-scrollable>
-	  <div class="buttons">
-		<paper-button dialog-confirm autofocus>OK</paper-button>
-	  </div>
-	</paper-dialog>
-	
-  </template>
+        <style include="shared-styles" is="custom-style">
+            :host {
+                display: block;
+                width: 100%;
+                height: 100%;
+                color: white;
+            }
 
-  <script>
-    /**
-     * @customElement
-     * @polymer
-     */
-    class SelfikonApp extends Polymer.Element {
-	
-	 
-	
-      static get is() { return 'selfikon-app'; }
-      static get properties() {
-        return {
-          prop1: {
-            type: String,
-            value: 'selfikon-app'
-          },
-		  
-		  sloganHidden: {
-			type: Boolean,
-			value: true
-		  },
-		  
-		  buttonsHidden:{
-			type: Boolean,
-			value: true
-		  },
-		  
-		  isAtTop: {
-			type: Boolean,
-			value: true
-		  },
-		  
-		  canScroll: {
-			type: Boolean,
-			value: false
-		  },
-		  
-		  isAtBottom: {
-			type: Boolean,
-			value: false
-		  }
-        };
-      }
-	  
-	  constructor(){
-		super();
-		var that = this;
-		
-		
-		Polymer.AppLayout.registerEffect('selfikon-logo', {
-				setUp: function(config){
-				// the effect's config is passed to the setUp.
-				var logo = Polymer.dom(this).querySelector('#logo');
-				var toolbar = Polymer.dom(this).querySelector('#toolbar');
-				this._fxResizeLogo = { 
-					logo: logo,
-					height: this.offsetHeight,
-					finalScale: toolbar.offsetHeight/logo.offsetHeight,
-					toolbarHeight: toolbar.offsetHeight/2
-				};
-			  },
+            app-header {
+                position: relative;
+                height: 100vh;
+            }
 
-			  run: function(progress) {
-				 // the progress of the effect
-				 var scale = 1 - progress;
-				 if(progress == 0){
-					that.isAtTop = true;
-				 }else{
-					that.isAtTop = false;
-				 }
-				 var scaleT = scale * (1 - this._fxResizeLogo.finalScale) + this._fxResizeLogo.finalScale;
-				 this.transform('translate3d(0, '+ (progress*this._fxResizeLogo.height/2-progress*this._fxResizeLogo.toolbarHeight) +'px ,0) scale3d(' + scaleT + ', '+ scaleT +', 1) ',  this._fxResizeLogo.logo);
-			  },
+            app-header[scrollable] {
+                pointer-events: none;
+            }
 
-			  tearDown: function() {
-				 // clean up and reset of states
-				 delete this._fxResizeLogo;
-			  }
-			})
-			
-			
-			
-		}
-		
-		connectedCallback(){
-			super.connectedCallback();	
-			
-			this.$.scrollThreshold.scrollTarget = this.$.layout.$.contentContainer;
-			this.$.scrollThreshold.clearTriggers();
-			
-			var that = this;
-			this.fadeInLogo().then(function(){
-				
-				return that.fadeInSlogan();
-			}).then(function(){
-				return that.fadeInButtonsHolder();
-			}).then(function(){
-				return that.canScroll = true;
-			});
-		}
-		
-		
-		
-		openTosDialog() {
-			this.$.dialogTos.open();
-		}
-		
-		openPpDialog(){
-			this.$.dialogPp.open();
-		}
-		
-		
-		fadeInLogo(){
-		var animation = this.$.logo.animate([
-			{
-				opacity: 0, 
-				easing: 'ease-out'
-			},
-			{
-				opacity: 1,
-				easing: 'ease-in'
-			}
-		],
-	{
-      duration: 1500,
-    });
-		
-		return animation.finished;
-		}
-		
-		fadeInSlogan(){
-			this.sloganHidden = false;
-			var animation = this.$.slogan.animate([
-			{
-				opacity: 0, 
-				easing: 'ease-out'
-			},
-			{
-				opacity: 1,
-				easing: 'ease-in'
-			}
-		],
-	{
-      duration: 1500,
-    });
-		return animation.finished;
-	}
-	
-	fadeInButtonsHolder(){
-			this.buttonsHidden = false;
-			var animation = this.$.buttonsHolder.animate([
-			{
-				opacity: 0, 
-				easing: 'ease-out'
-			},
-			{
-				opacity: 1,
-				easing: 'ease-in'
-			}
-		],
-	{
-      duration: 1500,
-    });
-		return animation.finished;
-	}
-	
-	
-}
-    
-	
+            #toolbar {
+                height: 5em;
+            }
 
-    window.customElements.define(SelfikonApp.is, SelfikonApp);
-  </script>
+            app-header[filled] > #toolbar {
+                background-color: white;
+            }
+
+            app-header[filled] > #buttonsHolder img {
+                opacity: 1;
+            }
+
+            #logoHolder {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                @apply(--layout-center-justified);
+            }
+
+            #logo img {
+                width: 700px;
+                margin: 5rem 0;
+            }
+
+            #slogan {
+                height: 0;
+                overflow: visible;
+                text-align: center;
+                position: relative;
+                top: -6rem;
+                font-size: 3em;
+                color: #048989;
+            }
+
+            #slogan > span {
+                font-style: italic;
+            }
+
+            h1 {
+                text-align: center;
+                font-weight: 400;
+                font-size: 1.3em;
+            }
+
+            #introText {
+                width: 50%;
+                margin-top: 2em;
+            }
+
+            .slant {
+                width: 100vw;
+                height: 100px;
+                transform: skewY(-2deg);
+                z-index: 1;
+                margin-top: -50px;
+                margin-bottom: -50px;
+                box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5);
+                position: relative;
+            }
+
+            .reverse-slant {
+                transform: skewY(2deg);
+            }
+
+            .content {
+                padding-bottom: 50px;
+                position: relative;
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                @apply(--layout-center-justified);
+                @apply(--layout-wrap);
+            }
+
+            .segment1 {
+                background: #06c6c6;
+            }
+
+            .segment1.slant {
+                z-index: 1;
+            }
+
+            .segment1.content {
+                z-index: 2;
+            }
+
+            .segment2 {
+                background: #05adad;
+            }
+
+            .segment2.slant {
+                z-index: 3;
+            }
+
+            .segment2.content {
+                z-index: 4;
+            }
+
+            .segment3 {
+                background: #0b7474;
+            }
+
+            .segment3.slant {
+                z-index: 5;
+            }
+
+            .segment3.content {
+                z-index: 6;
+            }
+
+            .segment-content {
+                @apply(--layout-vertical);
+                @apply(--layout-center);
+            }
+
+            #screenshotsContainer {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+            }
+
+            .screenshot {
+                height: 40vh;
+                margin: 0 1em;
+                box-shadow: 0 0 20px -5px black, 0 15px 10px -5px rgba(0, 0, 0, 0.3);
+            }
+
+            #highlightsContainer {
+                padding: 40px;
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                @apply(--layout-wrap);
+                @apply(--layout-center-justified);
+            }
+
+            #widgetContainer {
+                padding: 50px;
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                @apply(--layout-center-justified);
+            }
+
+            #teamTitle {
+                font-size: 1.2em;
+            }
+
+            #teamContainer {
+                @apply(--layout-horizontal);
+                @apply(--layout-start);
+                @apply(--layout-justified);
+            }
+
+            #buttonsHolder {
+                height: 5em;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 0 0.25em;
+                @apply(--layout-horizontal);
+                @apply(--layout-justified);
+                @apply(--layout-center);
+            }
+
+            #socialHolder {
+                @apply(--layout-horizontal);
+            }
+
+            #buttonsHolder img {
+                height: 50px;
+                margin: 0 0.25em;
+                opacity: 0.8;
+                transition: 0.2s opacity;
+                pointer-events: all;
+            }
+
+            #buttonsHolder a {
+                height: 50px;
+            }
+
+            #buttonsHolder img:hover {
+                opacity: 1;
+            }
+
+            #storesHolder {
+                @apply(--layout-horizontal);
+            }
+
+            footer {
+                background: #0a6767;
+                padding: 1em;
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                @apply(--layout-justified);
+            }
+
+            highlight-widget {
+                @apply(--layout-flex);
+            }
+
+            [hidden] {
+                display: none !important;
+            }
+        </style>
+
+        <app-header-layout has-scrolling-region id="layout">
+            <app-header scrollable$="[[canScroll]]" slot="header" fixed condenses effects="selfikon-logo"
+                        filled$="[[isScrolledPastHeader]]">
+                <div id="toolbar"></div>
+
+                <div id="logoHolder">
+                    <div id="logo">
+                        <img src="/images/logo-color.svg">
+                        <div id="slogan" hidden$="[[sloganHidden]]">show your self<span>ie</span></div>
+                    </div>
+                </div>
+
+                <div id="buttonsHolder" hidden$="[[buttonsHidden]]">
+                    <div id="socialHolder">
+                        <a href="http://selfikon.com/#/" target="_blank"><img src="/images/face.svg"/></a>
+                        <a href="http://selfikon.com/#/" target="_blank"><img src="/images/insta.svg"/></a>
+                        <a href="http://selfikon.com/#/" target="_blank"><img src="/images/twitter.svg"/></a>
+                        <a href="http://selfikon.com/#/" target="_blank"><img src="/images/vk.svg"/></a>
+                        <a href="http://selfikon.com/#/" target="_blank"><img src="/images/linkedin.svg"/></a>
+                    </div>
+                    <div id="storesHolder">
+                        <a href="http://selfikon.com/#/" target="_blank"><img src="/images/playstore.jpg"/></a>
+                        <a href="http://selfikon.com/#/" target="_blank"><img src="/images/appstore.jpg"/></a>
+                    </div>
+                </div>
+            </app-header>
+
+            <div class="content segment1">
+                <div class="segment-content">
+                    <h1 id="introText">Welcome to the fastest growing selfie social network in the world! Selfikon
+                        prides
+                        itself on being the best place for you and your selfies. Come see, like, share, and even take
+                        the top spot in a fast growing community, surrounded by people like you. It’s all about giving
+                        you a way to show yourself.</h1>
+                    <div id="screenshotsContainer">
+                        <img src="images/screenshots/1.png" class="screenshot"/>
+                        <img src="images/screenshots/2.png" class="screenshot"/>
+                        <img src="images/screenshots/3.png" class="screenshot"/>
+                    </div>
+                    <div id="highlightsContainer">
+                        <highlight-widget>
+                            <img src="images/highlights/2016.png" slot="image">
+                            <p slot="text">Established in 2016</p>
+                        </highlight-widget>
+                        <highlight-widget>
+                            <img src="images/highlights/users.png" slot="image">
+                            <p slot="text">Over 160 thousand users!</p>
+                        </highlight-widget>
+                        <highlight-widget>
+                            <img src="images/highlights/cup.png" slot="image">
+                            <p slot="text">Top 20 European Start-up by Startup Grind</p>
+                        </highlight-widget>
+                    </div>
+                </div>
+            </div>
+            <div class="slant segment2"></div>
+            <div class="content segment2">
+                <div class="segment-content">
+                    <h1>On Selfikon, #tags take center stage. Each #tag is a community that you can follow, join, and
+                        enjoy being a part of.</h1>
+                    <div id="widgetContainer">
+                        <content-widget>
+                        </content-widget>
+                    </div>
+                </div>
+            </div>
+            <div class="slant segment3 reverse-slant"></div>
+            <div class="content segment3">
+                <div class="segment-content">
+                    <h1 id="teamTitle">Selfikon started as an idea back in 2015, and came to life thanks to these
+                        people:</h1>
+                    <div id="teamContainer">
+                        <team-widget>
+                            <img src="images/team/vukasin.png" slot="image">
+                            <span slot="name">Vukašin Bosanac</span>
+                            <span slot="position">CEO/Marketing</span>
+                        </team-widget>
+                        <team-widget>
+                            <img src="images/team/nina.png" slot="image">
+                            <span slot="name">Nina Bosanac</span>
+                            <span slot="position">Brand/Design</span>
+                        </team-widget>
+                        <team-widget>
+                            <img src="images/team/jovan.png" slot="image">
+                            <span slot="name">Jovan Bosanac</span>
+                            <span slot="position">Ideas/Business</span>
+                        </team-widget>
+                        <team-widget>
+                            <img src="images/team/kraken.png" slot="image">
+                            <span slot="name">Miloš Maran</span>
+                            <span slot="position">Frontend/App Developer</span>
+                        </team-widget>
+                        <team-widget>
+                            <img src="images/team/bogdanovic.png" slot="image">
+                            <span slot="name">Miloš Bogdanović</span>
+                            <span slot="position">Business & Planning</span>
+                        </team-widget>
+                        <team-widget>
+                            <img src="images/team/vuk.png" slot="image">
+                            <span slot="name">Vuk Vasić</span>
+                            <span slot="position">Backend Developer</span>
+                        </team-widget>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div id="footerButtons">
+                    <paper-button raised on-tap="openTosDialog">Terms of service</paper-button>
+                    <paper-button raised on-tap="openPpDialog">Privacy policy</paper-button>
+                </div>
+                <div id="footerDetails">
+                    <span>&copy;2017 Selfikon d.o.o.</span>
+                    <a href="mailto:vukasin.bosanac@selfikon.com">Contact</a>
+                </div>
+            </footer>
+        </app-header-layout>
+
+        <paper-dialog id="dialogTos">
+            <h2>Terms of service</h2>
+            <paper-dialog-scrollable>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute
+                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                    est laborum.
+                </p>
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <paper-button dialog-confirm autofocus>OK</paper-button>
+            </div>
+        </paper-dialog>
+
+        <paper-dialog id="dialogPp">
+            <h2>Privacy policy</h2>
+            <paper-dialog-scrollable>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute
+                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                    est laborum.
+                </p>
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <paper-button dialog-confirm autofocus>OK</paper-button>
+            </div>
+        </paper-dialog>
+
+    </template>
+
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class SelfikonApp extends Polymer.Element {
+
+
+            static get is() {
+                return 'selfikon-app';
+            }
+
+            static get properties() {
+                return {
+                    prop1: {
+                        type: String,
+                        value: 'selfikon-app'
+                    },
+
+                    sloganHidden: {
+                        type: Boolean,
+                        value: true
+                    },
+
+                    buttonsHidden: {
+                        type: Boolean,
+                        value: true
+                    },
+
+                    isAtTop: {
+                        type: Boolean,
+                        value: true
+                    },
+
+                    isScrolledPastHeader: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    canScroll: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    isAtBottom: {
+                        type: Boolean,
+                        value: false
+                    }
+                };
+            }
+
+            constructor() {
+                super();
+                var that = this;
+
+                Polymer.AppLayout.registerEffect('selfikon-logo', {
+                    setUp: function (config) {
+                        // the effect's config is passed to the setUp.
+                        var logo = Polymer.dom(this).querySelector('#logo');
+                        var toolbar = Polymer.dom(this).querySelector('#toolbar');
+                        this._fxResizeLogo = {
+                            logo: logo,
+                            height: this.offsetHeight,
+                            finalScale: toolbar.offsetHeight / logo.offsetHeight,
+                            toolbarHeight: toolbar.offsetHeight / 2
+                        };
+                    },
+
+                    run: function (progress) {
+                        // the progress of the effect
+                        var scale = 1 - progress;
+                        that.isAtTop = progress === 0;
+                        that.isScrolledPastHeader = progress === 1;
+                        var scaleT = scale * (1 - this._fxResizeLogo.finalScale) + this._fxResizeLogo.finalScale;
+                        this.transform('translate3d(0, ' + (progress * this._fxResizeLogo.height / 2 - progress * this._fxResizeLogo.toolbarHeight) + 'px ,0) scale3d(' + scaleT + ', ' + scaleT + ', 1) ', this._fxResizeLogo.logo);
+                    },
+
+                    tearDown: function () {
+                        // clean up and reset of states
+                        delete this._fxResizeLogo;
+                    }
+                });
+
+
+            }
+
+            setupParticles() {
+                particlesJS("particlesHolder", {
+                    "particles": {
+                        "number": {
+                            "value": 30,
+                            "density": {"enable": true, "value_area": 500}
+                        },
+                        "shape": {
+                            "type": "image",
+                            "image": {"src": "images/star.png", "width": 100, "height": 100}
+                        },
+                        "opacity": {
+                            "value": 0.1
+                        },
+                        "size": {
+                            "value": 16,
+                            "random": true
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#048988",
+                            "opacity": 0.3,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 3,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {"enable": false, "rotateX": 600, "rotateY": 1200}
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+
+                this.setupParticles();
+                var that = this;
+                this.fadeInLogo().then(function () {
+                    return that.fadeInSlogan();
+                }).then(function () {
+                    return that.fadeInButtonsHolder();
+                }).then(function () {
+                    return that.canScroll = true;
+                });
+            }
+
+
+            openTosDialog() {
+                this.$.dialogTos.open();
+            }
+
+            openPpDialog() {
+                this.$.dialogPp.open();
+            }
+
+
+            fadeInLogo() {
+                var animation = this.$.logo.animate([
+                        {
+                            opacity: 0,
+                            easing: 'ease-out'
+                        },
+                        {
+                            opacity: 1,
+                            easing: 'ease-in'
+                        }
+                    ],
+                    {
+                        delay: 1000,
+                        duration: 500,
+                        fill: 'backwards'
+                    });
+                return animation.finished;
+            }
+
+            fadeInSlogan() {
+                this.sloganHidden = false;
+                var animation = this.$.slogan.animate([
+                        {
+                            opacity: 0,
+                            easing: 'ease-out'
+                        },
+                        {
+                            opacity: 1,
+                            easing: 'ease-in'
+                        }
+                    ],
+                    {
+                        duration: 500,
+                    });
+                return animation.finished;
+            }
+
+            fadeInButtonsHolder() {
+                this.buttonsHidden = false;
+                var animation = this.$.buttonsHolder.animate([
+                        {
+                            opacity: 0,
+                            easing: 'ease-out'
+                        },
+                        {
+                            opacity: 1,
+                            easing: 'ease-in'
+                        }
+                    ],
+                    {
+                        duration: 500,
+                    });
+                return animation.finished;
+            }
+
+
+        }
+
+
+        window.customElements.define(SelfikonApp.is, SelfikonApp);
+    </script>
 </dom-module>

@@ -13,6 +13,7 @@
     <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="import" href="/src/selfikon-app/selfikon-app.html">
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 	<link rel="import" href="/bower_components/paper-slider/paper-slider.html">
 	
 	<style>
@@ -23,9 +24,18 @@
 			overflow: hidden;
 			font-family: 'Open Sans', Arial;
 		}
+        #particlesHolder{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            will-change: transform;
+        }
 	</style>
   </head>
   <body>
+    <div id="particlesHolder"></div>
     <selfikon-app>
 	</selfikon-app>
 	

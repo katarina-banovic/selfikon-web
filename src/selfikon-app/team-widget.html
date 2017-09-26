@@ -1,61 +1,82 @@
 <dom-module id="team-widget">
-  <template>
-  
-    <style include="shared-styles" is="custom-style">
-      
-        :host {
-		padding: 15px;
-		box-sizing: border-box;
-		@apply(--layout-horizontal);
-		@apply(--layout-center);
-      }
-     
-	 #circle{
-		border-radius: 50%;
-		border: 3px solid white;
-		overflow: hidden;
-		width: 100px;
-		height: 100px;
-		@apply(--layout-flex-none);
-		
-	}
-	
-	#circle ::slotted(*){
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-	
-    </style>
-	
-	<div id="circle">
-		<slot name="image"></slot>
-	</div>
-	
-  </template>
+    <template>
 
-  <script>
-    /**
-     * @customElement
-     * @polymer
-     */
-    class TeamWidget extends Polymer.Element {
-	
-	 
-	
-      static get is() { return 'team-widget'; }
-      
-	  
-	  constructor(){
-		super();
-			
-		}
-		
-		
-		
-    }
-	
+        <style include="shared-styles" is="custom-style">
 
-    window.customElements.define(TeamWidget.is, TeamWidget);
-  </script>
+            :host {
+                padding: 15px;
+                box-sizing: border-box;
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                text-align: center;
+            }
+
+            #circle {
+                border-radius: 50%;
+                border: 3px solid white;
+                overflow: hidden;
+                width: 60px;
+                height: 60px;
+                @apply(--layout-flex-none);
+            }
+
+            #circle ::slotted(*) {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            #right{
+                margin-left: 0.4em;
+            }
+
+            #name{
+                font-weight: bold;
+                font-size: 1.1em;
+            }
+            #position{
+                font-weight: 300;
+                font-size: 0.9em;
+            }
+
+        </style>
+
+        <!--<div id="circle">-->
+            <!--<slot name="image"></slot>-->
+        <!--</div>-->
+        <div id="right">
+            <div id="name">
+                <slot name="name"></slot>
+            </div>
+            <div id="position">
+                <slot name="position"></slot>
+            </div>
+        </div>
+
+    </template>
+
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class TeamWidget extends Polymer.Element {
+
+
+            static get is() {
+                return 'team-widget';
+            }
+
+
+            constructor() {
+                super();
+
+            }
+
+
+        }
+
+
+        window.customElements.define(TeamWidget.is, TeamWidget);
+    </script>
 </dom-module>
