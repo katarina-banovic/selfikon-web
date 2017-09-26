@@ -1,0 +1,71 @@
+<dom-module id="highlight-widget">
+  <template>
+  
+    <style include="shared-styles" is="custom-style">
+      :host {
+		padding: 15px;
+		box-sizing: border-box;
+		@apply(--layout-horizontal);
+		@apply(--layout-center);
+      }
+	
+		
+	  
+	  #circle{
+		border-radius: 50%;
+		border: 3px solid white;
+		overflow: hidden;
+		width: 100px;
+		height: 100px;
+		@apply(--layout-flex-none);
+		
+	}
+	
+	#circle ::slotted(*){
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	
+	#text {
+		font-size: 0.8em;
+	}
+	  
+    </style>
+	
+	<div id="circle">
+		<slot name="image"></slot>
+	</div>
+	
+	<div id="text">
+		<slot name="text"></slot>
+	</div>
+	
+	
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class HighlightWidget extends Polymer.Element {
+	
+	 
+	
+      static get is() { return 'highlight-widget'; }
+      
+	  
+	  constructor(){
+		super();
+			
+		}
+		
+		
+		
+    }
+	
+
+    window.customElements.define(HighlightWidget.is, HighlightWidget);
+  </script>
+</dom-module>

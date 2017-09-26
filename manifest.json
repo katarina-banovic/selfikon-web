@@ -1,0 +1,6 @@
+{
+  "name": "selfikon-app",
+  "short_name": "selfikon-app",
+  "start_url": "/",
+  "display": "standalone"
+}
